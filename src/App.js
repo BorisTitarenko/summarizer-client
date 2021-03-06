@@ -1,6 +1,5 @@
 import React from 'react';
 import Login from './Authorization/Login';
-import Logout from './Authorization/Logout';
 import UserPanel from './Authorization/UserPanel'
 import {BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation} from "react-router-dom";
 import AuthContext from './Authorization/AuthContext'
