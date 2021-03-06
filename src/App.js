@@ -1,17 +1,30 @@
-
 import React from 'react';
-import './App.css';
-import Login from './Login/Login';
-import Logout from './Login/Logout';
+import Login from './Authorization/Login';
+import Logout from './Authorization/Logout';
+import UserPanel from './Authorization/UserPanel'
+import {BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation} from "react-router-dom";
+import AuthContext from './Authorization/AuthContext'
+import Summarizer from './Summarize/Summarizer'
+
 
 function App() {
+
   return (
-    <div className="App">
-      <h2>The Components way</h2>
-      <Login />
-      <br />
-      <Logout />
-    </div>
+    <AuthContext>
+      <div className="App">
+        <UserPanel/>
+        <Router>
+          <Switch>
+            <Route path='/summarize'>
+              <Summarizer/>
+            </Route>
+            <Route path='/login'>
+              <Login/>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </AuthContext>
   );
 }
 
