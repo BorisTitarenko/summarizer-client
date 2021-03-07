@@ -4,7 +4,7 @@ import UserPanel from './Authorization/UserPanel'
 import {BrowserRouter as Router, Switch, Route, Redirect, useHistory, useLocation} from "react-router-dom";
 import AuthContext from './Authorization/AuthContext'
 import Summarizer from './Summarize/Summarizer'
-
+import PrivateRoute from './Authorization/PrivateRoute'
 
 function App() {
 
@@ -14,12 +14,15 @@ function App() {
         <UserPanel/>
         <Router>
           <Switch>
-            <Route path='/summarize'>
+            <PrivateRoute path='/summarize'>
               <Summarizer/>
-            </Route>
+            </PrivateRoute>
             <Route path='/login'>
               <Login/>
             </Route>
+            <PrivateRoute exact path='/'>
+              <Redirect to='/summarize'/>
+            </PrivateRoute>
           </Switch>
         </Router>
       </div>
