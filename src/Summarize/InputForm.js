@@ -22,15 +22,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function InputForm({setResponse}){
+function InputForm({props}){
     const [text, setText] = useState('')
 
-    function summarize(event) {
-        event.preventDefault();
-        fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    async function apiCall() {
+        props.setLoading(true);
+        return await fetch('https://jsonplaceholder.typicode.com/posts/2', {
             method: 'GET',
             data: {}
-          }).then((response) => response.json()).then((response) => setResponse(response.body))
+          })
+    }
+    async function summarize(event) {
+        event.preventDefault();
+        let promise = apiCall();
+        promise.then((response) => response.json())
+          .then((response) => {
+              setTimeout(() => {
+                props.setResponse(response.body)
+                props.setLoading(false)
+              }, 2000);
+            })
     }
 
     const classes = useStyles();
