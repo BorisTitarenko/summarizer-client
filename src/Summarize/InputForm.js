@@ -8,8 +8,9 @@ const useStyles = makeStyles((theme) => ({
     form: {
         height: 'auto',
         width: '100%',
-        border: 0,
-        borderRadius: '10%'
+        border: '1px solid',
+        borderRadius: 4,
+        borderColor: 'black'
     },
     root: {
         margin: theme.spacing(3)
@@ -17,8 +18,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(3),
         color: 'black',
-        border: '1px solid',
-        borderColor: 'black'
+        border: '1px solid'
     }
 }));
 

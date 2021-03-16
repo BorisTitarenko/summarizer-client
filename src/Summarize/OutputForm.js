@@ -6,15 +6,16 @@ const useStyles = makeStyles((theme) => ({
     form: {
         height: 'auto',
         width: '100%',
-        border: 0,
-        borderRadius: '10%'
-    },
+        border: '1px solid',
+        borderColor: 'black',
+        borderRadius: 5,
+        '& .MuiOutlinedInput-root' : {
+            borderRadius: 'inherit',
+            borderColor: 'inherit'
+        }
+    }, 
     root: {
         margin: theme.spacing(3)
-    },
-    button: {
-        margin: theme.spacing(3),
-        borderColor: 'black'
     }
 }));
 

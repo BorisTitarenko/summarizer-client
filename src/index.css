@@ -21,6 +21,9 @@ code {
   display: block;
   margin: 0 auto;
 }
+textarea {
+  border-color: inherit !important;
+}
 
 .lds-spinner {
   color: 'grey';
