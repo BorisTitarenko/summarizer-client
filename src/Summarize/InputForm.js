@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {TextField, Button, Grid} from '@material-ui/core'
+import {TextField, Button, Grid, Select, FormControl, InputLabel} from '@material-ui/core'
 import PropTypes from 'prop-types';
 import '../index.css'
 
@@ -18,6 +18,13 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(3),
         color: 'black',
+        border: '1px solid',
+        fontFamily: '\'Open Sans\', sans-serif',
+        height: '4em'
+    },
+    select: {
+        margin: theme.spacing(3),
+        color: 'black',
         border: '1px solid'
     }
 }));
@@ -27,9 +34,9 @@ function InputForm({props}){
 
     async function apiCall() {
         props.setLoading(true);
-        return await fetch('https://jsonplaceholder.typicode.com/posts/2', {
-            method: 'GET',
-            data: {}
+        return await fetch('http://c90fd30a5a3d.ngrok.io/predict', {
+            method: 'POST',
+            body: {model: "BART", input_text: text}
           })
     }
     async function summarize(event) {
@@ -37,10 +44,8 @@ function InputForm({props}){
         let promise = apiCall();
         promise.then((response) => response.json())
           .then((response) => {
-              setTimeout(() => {
-                props.setResponse(response.body)
-                props.setLoading(false)
-              }, 2000);
+                props.setResponse(response.body);
+                props.setLoading(false);
             })
     }
 
@@ -61,6 +66,14 @@ function InputForm({props}){
                     </Grid>
                     <Grid item xs={9}>
                         <Button type='submit' className={classes.button}> Summarize</Button>
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="model"></InputLabel>
+                            <Select native id="model" className={classes.select}>
+                                <option aria-label="None" value="" />
+                                <option value={"BERT"}>BERT</option>
+                                <option value={"BART"}>BART</option>
+                            </Select>
+                        </FormControl>
                     </Grid>
                 </Grid>
                 
