@@ -40,12 +40,16 @@ function InputForm({props}){
         event.preventDefault();
         props.setLoading(true);
 
-        fetch('http://c90fd30a5a3d.ngrok.io/predict', {
+        fetch('http://127.0.0.1:5000/predict', {
             method: 'POST',
-            body: {model: modelName, input_text: text, num_words: wordsCount}
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({model: modelName, input_text: text, num_words: wordsCount, num_beams: 12})
           }).then((response) => response.json())
           .then((response) => {
-                props.setResponse(response.body);
+                props.setResponse(response.response.summary);
                 props.setLoading(false);
             })
     }
